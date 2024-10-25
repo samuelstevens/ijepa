@@ -1,0 +1,17 @@
+[project]
+name = "vision-pretraining"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beartype>=0.19.0",
+    "jaxtyping>=0.2.34",
+    "submitit>=1.5.2",
+    "torch>=2.5.0",
+    "torchvision>=0.20.0",
+    "tyro>=0.8.14",
+]
+
+[tool.ruff.lint]
+ignore = ["F722"]
