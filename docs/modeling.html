@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.1">
+<title>modeling API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>modeling</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="modeling.AttentionBlock"><code class="flex name class">
+<span>class <span class="ident">AttentionBlock</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
+
+class Model(nn.Module):
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As per the example above, an <code>__init__()</code> call to the parent class
+must be made before assignment on the child.</p>
+</div>
+<p>:ivar training: Boolean represents whether this module is in training or
+evaluation mode.
+:vartype training: bool</p>
+<p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class AttentionBlock(torch.nn.Module):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+</dd>
+<dt id="modeling.PatchEmbedding"><code class="flex name class">
+<span>class <span class="ident">PatchEmbedding</span></span>
+<span>(</span><span>in_ch: int, output_d: int, patch_size: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
+
+class Model(nn.Module):
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As per the example above, an <code>__init__()</code> call to the parent class
+must be made before assignment on the child.</p>
+</div>
+<p>:ivar training: Boolean represents whether this module is in training or
+evaluation mode.
+:vartype training: bool</p>
+<p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class PatchEmbedding(torch.nn.Module):
+    def __init__(self, in_ch: int, output_d: int, patch_size: int):
+        super().__init__()
+        self.patch_size = patch_size
+        self.linear = torch.nn.Linear(patch_size * patch_size * in_ch, output_d)
+
+    @jaxtyped(typechecker=beartype.beartype)
+    def forward(
+        self, x: Float[Tensor, &#34;batch channels width_i height_i&#34;]
+    ) -&gt; Float[Tensor, &#34;batch patches d&#34;]:
+        x = einops.rearrange(
+            x,
+            &#34;b c (w pw) (h ph) -&gt; b (w h) (c pw ph)&#34;,
+            ph=self.patch_size,
+            pw=self.patch_size,
+        )
+        x = self.linear(x)
+        return x</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="modeling.PatchEmbedding.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: jaxtyping.Float[Tensor, 'batch channels width_i height_i']) ‑> jaxtyping.Float[Tensor, 'batch patches d']</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="modeling.PositionalEmbedding"><code class="flex name class">
+<span>class <span class="ident">PositionalEmbedding</span></span>
+<span>(</span><span>d: int, size_p: tuple[int, int], temperature: float = 10000.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See this <a href="https://marimo.app/l/own8um">notebook</a> for an interactive notebook to understand how 2D sin-cos positional embeddings work.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>d</code></strong></dt>
+<dd>Embedding dimension</dd>
+<dt><strong><code>size_p</code></strong></dt>
+<dd>Size of the inputs in patches.</dd>
+<dt><strong><code>temperature</code></strong></dt>
+<dd>How to scale sin/cos period.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class PositionalEmbedding(torch.nn.Module):
+    &#34;&#34;&#34;
+    See this [notebook](https://marimo.app/l/own8um) for an interactive notebook to understand how 2D sin-cos positional embeddings work.
+    &#34;&#34;&#34;
+
+    def __init__(self, d: int, size_p: tuple[int, int], temperature: float = 10000.0):
+        &#34;&#34;&#34;
+        Args:
+            d: Embedding dimension
+            size_p: Size of the inputs in patches.
+            temperature: How to scale sin/cos period.
+        &#34;&#34;&#34;
+        super().__init__()
+        err_msg = &#34;Embed dim must be divisible by 4 for 2D sin-cos position embedding&#34;
+        assert d % 4 == 0, err_msg
+        wp, hp = size_p
+        grid_wp = torch.arange(wp, dtype=torch.float32)
+        grid_hp = torch.arange(hp, dtype=torch.float32)
+        grid_wp, grid_hp = torch.meshgrid(grid_wp, grid_hp)
+
+        pos_d = d // 4
+        omega = torch.arange(pos_d, dtype=torch.float32) / pos_d
+        omega = 1.0 / (temperature**omega)
+
+        out_w = torch.einsum(&#34;m,d-&gt;md&#34;, grid_wp.flatten(), omega)
+        out_h = torch.einsum(&#34;m,d-&gt;md&#34;, grid_hp.flatten(), omega)
+
+        pos_embd = torch.cat(
+            [
+                torch.sin(out_w),
+                torch.cos(out_w),
+                torch.sin(out_h),
+                torch.cos(out_h),
+            ],
+            axis=1,
+        )
+        self.register_buffer(&#34;pos_embd&#34;, pos_embd)
+
+    @jaxtyped(typechecker=beartype.beartype)
+    def forward(self, pos: Int[Tensor, &#34; patches&#34;]) -&gt; Float[Tensor, &#34;patches d&#34;]:
+        return self.pos_embd[pos]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="modeling.PositionalEmbedding.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, pos: jaxtyping.Int[Tensor, 'patches']) ‑> jaxtyping.Float[Tensor, 'patches d']</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="modeling.PredictorTransformer"><code class="flex name class">
+<span>class <span class="ident">PredictorTransformer</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Narrow predictor transformer for predicting the target representations from the context representations and the positional embeddings.</p>
+<p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class PredictorTransformer(torch.nn.Module):
+    &#34;&#34;&#34;
+    Narrow predictor transformer for predicting the target representations from the context representations and the positional embeddings.
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        super().__init__()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+</dd>
+<dt id="modeling.Transformer"><code class="flex name class">
+<span>class <span class="ident">Transformer</span></span>
+<span>(</span><span>d: int, mlp_d: int, n_heads: int, n_layers: int, p_dropout: float)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generic bidirectional transformer.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>d</code></strong></dt>
+<dd>Transformer residual dimension.</dd>
+<dt><strong><code>mlp_d</code></strong></dt>
+<dd>Hidden layer dimension of the MLPs.</dd>
+<dt><strong><code>n_heads</code></strong></dt>
+<dd>Number of attention heads.</dd>
+<dt><strong><code>n_layers</code></strong></dt>
+<dd>Number of layers.</dd>
+<dt><strong><code>p_dropout</code></strong></dt>
+<dd>Probability of dropout in attention and MLP layers.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class Transformer(torch.nn.Module):
+    &#34;&#34;&#34;
+    Generic bidirectional transformer.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self, d: int, mlp_d: int, n_heads: int, n_layers: int, p_dropout: float
+    ):
+        &#34;&#34;&#34;
+        Args:
+            d: Transformer residual dimension.
+            mlp_d: Hidden layer dimension of the MLPs.
+            n_heads: Number of attention heads.
+            n_layers: Number of layers.
+            p_dropout: Probability of dropout in attention and MLP layers.
+        &#34;&#34;&#34;
+        super().__init__()
+
+        self.attn_blocks = torch.nn.ModuleList([
+            AttentionBlock(d, mlp_d, n_heads, p_dropout) for _ in range(n_layers)
+        ])
+        breakpoint()
+
+    def forward(self, x: Float[Tensor, &#34;*batch d&#34;]) -&gt; Float[Tensor, &#34;*batch d&#34;]:
+        &#34;&#34;&#34;Feed `x` through the sequence of attention blocks.&#34;&#34;&#34;
+        for block in self.attn_blocks:
+            x = block(x)
+        return x</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="modeling.Transformer.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: jaxtyping.Float[Tensor, '*batch d']) ‑> jaxtyping.Float[Tensor, '*batch d']</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Feed <code>x</code> through the sequence of attention blocks.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="modeling.VisionTransformer"><code class="flex name class">
+<span>class <span class="ident">VisionTransformer</span></span>
+<span>(</span><span>d: int, patch_size: int, size_p: tuple[int, int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Vision transformer with patch embedding to project from pixel space to residual space and fixed 2D sin/cos position embedding.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>d</code></strong></dt>
+<dd>Transformer residual dimension.</dd>
+<dt><strong><code>patch_size</code></strong></dt>
+<dd>Length of one patch side in pixels.</dd>
+<dt><strong><code>size_p</code></strong></dt>
+<dd>Size of inputs in patches.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class VisionTransformer(torch.nn.Module):
+    &#34;&#34;&#34;
+    Vision transformer with patch embedding to project from pixel space to residual space and fixed 2D sin/cos position embedding.
+    &#34;&#34;&#34;
+
+    def __init__(self, d: int, patch_size: int, size_p: tuple[int, int]):
+        &#34;&#34;&#34;
+        Args:
+            d: Transformer residual dimension.
+            patch_size: Length of one patch side in pixels.
+            size_p: Size of inputs in patches.
+        &#34;&#34;&#34;
+        super().__init__()
+
+        self.patch_embd = PatchEmbedding(3, d, patch_size)
+        self.pos_embd = PositionalEmbedding(d, size_p)
+        self.transformer = Transformer(d)
+
+    def forward(
+        self, x: Float[Tensor, &#34;batch 3 width height&#34;], mask: Int[Tensor, &#34; patches&#34;]
+    ) -&gt; Float[Tensor, &#34;batch patches d&#34;]:
+        x = self.patch_embd(x)
+        x = x[:, mask, :]
+        x = x + self.pos_embd(mask)
+
+        x = self.transformer(x)
+
+        return x</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="modeling.VisionTransformer.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, x: jaxtyping.Float[Tensor, 'batch 3 width height'], mask: jaxtyping.Int[Tensor, 'patches']) ‑> jaxtyping.Float[Tensor, 'batch patches d']</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="modeling.AttentionBlock" href="#modeling.AttentionBlock">AttentionBlock</a></code></h4>
+</li>
+<li>
+<h4><code><a title="modeling.PatchEmbedding" href="#modeling.PatchEmbedding">PatchEmbedding</a></code></h4>
+<ul class="">
+<li><code><a title="modeling.PatchEmbedding.forward" href="#modeling.PatchEmbedding.forward">forward</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="modeling.PositionalEmbedding" href="#modeling.PositionalEmbedding">PositionalEmbedding</a></code></h4>
+<ul class="">
+<li><code><a title="modeling.PositionalEmbedding.forward" href="#modeling.PositionalEmbedding.forward">forward</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="modeling.PredictorTransformer" href="#modeling.PredictorTransformer">PredictorTransformer</a></code></h4>
+</li>
+<li>
+<h4><code><a title="modeling.Transformer" href="#modeling.Transformer">Transformer</a></code></h4>
+<ul class="">
+<li><code><a title="modeling.Transformer.forward" href="#modeling.Transformer.forward">forward</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="modeling.VisionTransformer" href="#modeling.VisionTransformer">VisionTransformer</a></code></h4>
+<ul class="">
+<li><code><a title="modeling.VisionTransformer.forward" href="#modeling.VisionTransformer.forward">forward</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
+</footer>
+</body>
+</html>
