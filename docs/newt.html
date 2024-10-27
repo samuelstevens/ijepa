@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.1">
+<title>newt API documentation</title>
+<meta name="description" content="NeWT: Natural World Tasks …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>newt</code></h1>
+</header>
+<section id="section-intro">
+<h1 id="newt-natural-world-tasks">NeWT: Natural World Tasks</h1>
+<p>NeWT is a collection of 164 binary classification tasks related to visual understanding of the natural world (<a href="https://arxiv.org/abs/2103.16483">CVPR 2021 paper</a>, <a href="https://github.com/visipedia/newt/tree/main">code</a>).</p>
+<p>We evaluate a vision model by extracting visual features for each image, fitting a linear SVM to the training examples, and evaluating on the test data.
+We aggregate scores across all 164 tasks.</p>
+<p>If you use this evaluation, be sure to cite the original work:</p>
+<pre><code>@inproceedings{van2021benchmarking,
+  title={Benchmarking Representation Learning for Natural World Image Collections},
+  author={Van Horn, Grant and Cole, Elijah and Beery, Sara and Wilber, Kimberly and Belongie, Serge and Mac Aodha, Oisin},
+  booktitle={Computer Vision and Pattern Recognition},
+  year={2021}
+}
+</code></pre>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="newt.evaluate"><code class="name flex">
+<span>def <span class="ident">evaluate</span></span>(<span>args: <a title="newt.Args" href="#newt.Args">Args</a>, model: torch.nn.modules.module.Module, img_transform) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The NeWT benchmark.</p></div>
+</dd>
+<dt id="newt.get_all_task_features"><code class="name flex">
+<span>def <span class="ident">get_all_task_features</span></span>(<span>args: <a title="newt.Args" href="#newt.Args">Args</a>, model: torch.nn.modules.module.Module, img_transform) ‑> collections.abc.Iterator[<a title="newt.Task" href="#newt.Task">Task</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.init_svc"><code class="name flex">
+<span>def <span class="ident">init_svc</span></span>(<span>seed: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new, randomly initialized SVM with a random hyperparameter search over kernel, C and gamma. It uses only 16 jobs in parallel to prevent overloading the CPUs on a shared machine.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="newt.Args"><code class="flex name class">
+<span>class <span class="ident">Args</span></span>
+<span>(</span><span>seed: int = 42, data: str = '', debug: bool = False, batch_size: int = 256, n_workers: int = 4, log_every: int = 10, device: str | torch.device = 'cuda')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>NeWT configuration.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+@dataclasses.dataclass(frozen=True)
+class Args:
+    &#34;&#34;&#34;NeWT configuration.&#34;&#34;&#34;
+
+    seed: int = 42
+    &#34;&#34;&#34;Random seed.&#34;&#34;&#34;
+    data: str = &#34;&#34;
+    &#34;&#34;&#34;Dataset directory; where you downloaded this task&#39;s data to.&#34;&#34;&#34;
+    debug: bool = False
+    &#34;&#34;&#34;Whether to run in debug mode.&#34;&#34;&#34;
+    batch_size: int = 256
+    &#34;&#34;&#34;Batch size for deep model.&#34;&#34;&#34;
+    n_workers: int = 4
+    &#34;&#34;&#34;Number of dataloader worker processes.&#34;&#34;&#34;
+    log_every: int = 10
+    &#34;&#34;&#34;How often (number of batches) to log progress.&#34;&#34;&#34;
+    device: str | torch.device = &#34;cuda&#34;
+    &#34;&#34;&#34;(computed at runtime) which kind of accelerator to use.&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="newt.Args.batch_size"><code class="name">var <span class="ident">batch_size</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Batch size for deep model.</p></div>
+</dd>
+<dt id="newt.Args.data"><code class="name">var <span class="ident">data</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Dataset directory; where you downloaded this task's data to.</p></div>
+</dd>
+<dt id="newt.Args.debug"><code class="name">var <span class="ident">debug</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Whether to run in debug mode.</p></div>
+</dd>
+<dt id="newt.Args.device"><code class="name">var <span class="ident">device</span> : str | torch.device</code></dt>
+<dd>
+<div class="desc"><p>(computed at runtime) which kind of accelerator to use.</p></div>
+</dd>
+<dt id="newt.Args.log_every"><code class="name">var <span class="ident">log_every</span> : int</code></dt>
+<dd>
+<div class="desc"><p>How often (number of batches) to log progress.</p></div>
+</dd>
+<dt id="newt.Args.n_workers"><code class="name">var <span class="ident">n_workers</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Number of dataloader worker processes.</p></div>
+</dd>
+<dt id="newt.Args.seed"><code class="name">var <span class="ident">seed</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Random seed.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="newt.Dataset"><code class="flex name class">
+<span>class <span class="ident">Dataset</span></span>
+<span>(</span><span>dir: str, df, transform)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A dataset that returns <code>(example id, image tensor)</code> tuples.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@jaxtyped(typechecker=beartype.beartype)
+class Dataset(torch.utils.data.Dataset):
+    &#34;&#34;&#34;
+    A dataset that returns `(example id, image tensor)` tuples.
+    &#34;&#34;&#34;
+
+    def __init__(self, dir: str, df, transform):
+        self.transform = transform
+        self.image_ids = df.get_column(&#34;id&#34;).to_list()
+        self.dir = dir
+
+    def __getitem__(self, i: int) -&gt; tuple[str, Float[Tensor, &#34;3 width height&#34;]]:
+        image_id = self.image_ids[i]
+        image = Image.open(os.path.join(self.dir, f&#34;{image_id}.jpg&#34;))
+        if self.transform is not None:
+            image = self.transform(image)
+        return image_id, image
+
+    def __len__(self) -&gt; int:
+        return len(self.image_ids)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.utils.data.dataset.Dataset</li>
+<li>typing.Generic</li>
+</ul>
+</dd>
+<dt id="newt.Task"><code class="flex name class">
+<span>class <span class="ident">Task</span></span>
+<span>(</span><span>name: str, cluster: str, features: jaxtyping.Float[ndarray, 'batch dim'], labels: jaxtyping.Int[ndarray, 'batch'], is_train: jaxtyping.Bool[ndarray, 'batch'], example_ids: jaxtyping.Shaped[ndarray, 'batch'])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Task is a group of features and labels for an SVM + a train/test split.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@jaxtyped(typechecker=beartype.beartype)
+@dataclasses.dataclass(frozen=True)
+class Task:
+    &#34;&#34;&#34;
+    Task is a group of features and labels for an SVM + a train/test split.
+    &#34;&#34;&#34;
+
+    name: str
+    cluster: str
+    features: Float[np.ndarray, &#34;batch dim&#34;]
+    labels: Int[np.ndarray, &#34; batch&#34;]
+    is_train: Bool[np.ndarray, &#34; batch&#34;]
+    example_ids: Shaped[np.ndarray, &#34; batch&#34;]  # Should be String[...]
+
+    def __repr__(self) -&gt; str:
+        return f&#34;Task(task={self.name}, cluster={self.cluster}, features={self.features.shape})&#34;
+
+    @property
+    def splits(
+        self,
+    ) -&gt; tuple[
+        tuple[Float[np.ndarray, &#34;n_train dim&#34;], Int[np.ndarray, &#34; n_train&#34;]],
+        tuple[Float[np.ndarray, &#34;n_test dim&#34;], Int[np.ndarray, &#34; n_test&#34;]],
+    ]:
+        &#34;&#34;&#34;
+        The features and labels for train and test splits.
+
+        Returned as `(x_train, y_train), (x_test, y_test)`.
+        &#34;&#34;&#34;
+        x_train = self.features[self.is_train]
+        y_train = self.labels[self.is_train]
+        x_test = self.features[~self.is_train]
+        y_test = self.labels[~self.is_train]
+
+        return (x_train, y_train), (x_test, y_test)</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="newt.Task.cluster"><code class="name">var <span class="ident">cluster</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.Task.example_ids"><code class="name">var <span class="ident">example_ids</span> : jaxtyping.Shaped[ndarray, 'batch']</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.Task.features"><code class="name">var <span class="ident">features</span> : jaxtyping.Float[ndarray, 'batch dim']</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.Task.is_train"><code class="name">var <span class="ident">is_train</span> : jaxtyping.Bool[ndarray, 'batch']</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.Task.labels"><code class="name">var <span class="ident">labels</span> : jaxtyping.Int[ndarray, 'batch']</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="newt.Task.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="newt.Task.splits"><code class="name">prop <span class="ident">splits</span> : tuple[tuple[jaxtyping.Float[ndarray, 'n_train dim'], jaxtyping.Int[ndarray, 'n_train']], tuple[jaxtyping.Float[ndarray, 'n_test dim'], jaxtyping.Int[ndarray, 'n_test']]]</code></dt>
+<dd>
+<div class="desc"><p>The features and labels for train and test splits.</p>
+<p>Returned as <code>(x_train, y_train), (x_test, y_test)</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def splits(
+    self,
+) -&gt; tuple[
+    tuple[Float[np.ndarray, &#34;n_train dim&#34;], Int[np.ndarray, &#34; n_train&#34;]],
+    tuple[Float[np.ndarray, &#34;n_test dim&#34;], Int[np.ndarray, &#34; n_test&#34;]],
+]:
+    &#34;&#34;&#34;
+    The features and labels for train and test splits.
+
+    Returned as `(x_train, y_train), (x_test, y_test)`.
+    &#34;&#34;&#34;
+    x_train = self.features[self.is_train]
+    y_train = self.labels[self.is_train]
+    x_test = self.features[~self.is_train]
+    y_test = self.labels[~self.is_train]
+
+    return (x_train, y_train), (x_test, y_test)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="newt.progress"><code class="flex name class">
+<span>class <span class="ident">progress</span></span>
+<span>(</span><span>it, *, every: int = 10, desc: str = 'progress', total: int = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps an iterable with a logger like tqdm but doesn't use any control codes to manipulate a progress bar, which doesn't work well when your output is redirected to a file. Instead, simple logging statements are used, but it includes quality-of-life features like iteration speed and predicted time to finish.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>it</code></strong></dt>
+<dd>Iterable to wrap.</dd>
+<dt><strong><code>every</code></strong></dt>
+<dd>How many iterations between logging progress.</dd>
+<dt><strong><code>desc</code></strong></dt>
+<dd>What to name the logger.</dd>
+<dt><strong><code>total</code></strong></dt>
+<dd>If non-zero, how long the iterable is.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@beartype.beartype
+class progress:
+    def __init__(self, it, *, every: int = 10, desc: str = &#34;progress&#34;, total: int = 0):
+        &#34;&#34;&#34;
+        Wraps an iterable with a logger like tqdm but doesn&#39;t use any control codes to manipulate a progress bar, which doesn&#39;t work well when your output is redirected to a file. Instead, simple logging statements are used, but it includes quality-of-life features like iteration speed and predicted time to finish.
+
+        Args:
+            it: Iterable to wrap.
+            every: How many iterations between logging progress.
+            desc: What to name the logger.
+            total: If non-zero, how long the iterable is.
+        &#34;&#34;&#34;
+        self.it = it
+        self.every = every
+        self.logger = logging.getLogger(desc)
+        self.total = total
+
+    def __iter__(self):
+        start = time.time()
+
+        try:
+            total = len(self)
+        except TypeError:
+            total = None
+
+        for i, obj in enumerate(self.it):
+            yield obj
+
+            if (i + 1) % self.every == 0:
+                now = time.time()
+                duration_s = now - start
+                per_min = (i + 1) / (duration_s / 60)
+
+                if total is not None:
+                    pred_min = (total - (i + 1)) / per_min
+                    self.logger.info(
+                        &#34;%d/%d (%.1f%%) | %.1f it/m (expected finish in %.1fm)&#34;,
+                        i + 1,
+                        total,
+                        (i + 1) / total * 100,
+                        per_min,
+                        pred_min,
+                    )
+                else:
+                    self.logger.info(&#34;%d/? | %.1f it/m&#34;, i + 1, per_min)
+
+    def __len__(self) -&gt; int:
+        if self.total &gt; 0:
+            return self.total
+
+        # Will throw exception.
+        return len(self.it)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul>
+<li><a href="#newt-natural-world-tasks">NeWT: Natural World Tasks</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="newt.evaluate" href="#newt.evaluate">evaluate</a></code></li>
+<li><code><a title="newt.get_all_task_features" href="#newt.get_all_task_features">get_all_task_features</a></code></li>
+<li><code><a title="newt.init_svc" href="#newt.init_svc">init_svc</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="newt.Args" href="#newt.Args">Args</a></code></h4>
+<ul class="two-column">
+<li><code><a title="newt.Args.batch_size" href="#newt.Args.batch_size">batch_size</a></code></li>
+<li><code><a title="newt.Args.data" href="#newt.Args.data">data</a></code></li>
+<li><code><a title="newt.Args.debug" href="#newt.Args.debug">debug</a></code></li>
+<li><code><a title="newt.Args.device" href="#newt.Args.device">device</a></code></li>
+<li><code><a title="newt.Args.log_every" href="#newt.Args.log_every">log_every</a></code></li>
+<li><code><a title="newt.Args.n_workers" href="#newt.Args.n_workers">n_workers</a></code></li>
+<li><code><a title="newt.Args.seed" href="#newt.Args.seed">seed</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="newt.Dataset" href="#newt.Dataset">Dataset</a></code></h4>
+</li>
+<li>
+<h4><code><a title="newt.Task" href="#newt.Task">Task</a></code></h4>
+<ul class="two-column">
+<li><code><a title="newt.Task.cluster" href="#newt.Task.cluster">cluster</a></code></li>
+<li><code><a title="newt.Task.example_ids" href="#newt.Task.example_ids">example_ids</a></code></li>
+<li><code><a title="newt.Task.features" href="#newt.Task.features">features</a></code></li>
+<li><code><a title="newt.Task.is_train" href="#newt.Task.is_train">is_train</a></code></li>
+<li><code><a title="newt.Task.labels" href="#newt.Task.labels">labels</a></code></li>
+<li><code><a title="newt.Task.name" href="#newt.Task.name">name</a></code></li>
+<li><code><a title="newt.Task.splits" href="#newt.Task.splits">splits</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="newt.progress" href="#newt.progress">progress</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
+</footer>
+</body>
+</html>

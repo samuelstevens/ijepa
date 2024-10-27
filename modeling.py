@@ -1,12 +1,13 @@
-""" """
+"""
+Defines all the models in good ol' stateful PyTorch modules.
+"""
 
 import beartype
-
-from jaxtyping import Float, Int, jaxtyped
-import torch.nn.functional as F
-import torch
-from torch import Tensor
 import einops
+import torch
+import torch.nn.functional as F
+from jaxtyping import Float, Int, jaxtyped
+from torch import Tensor
 
 
 @beartype.beartype
@@ -28,7 +29,7 @@ class PositionalEmbedding(torch.nn.Module):
         wp, hp = size_p
         grid_wp = torch.arange(wp, dtype=torch.float32)
         grid_hp = torch.arange(hp, dtype=torch.float32)
-        grid_wp, grid_hp = torch.meshgrid(grid_wp, grid_hp)
+        grid_wp, grid_hp = torch.meshgrid(grid_wp, grid_hp, indexing="ij")
 
         pos_d = d // 4
         omega = torch.arange(pos_d, dtype=torch.float32) / pos_d
@@ -55,10 +56,20 @@ class PositionalEmbedding(torch.nn.Module):
 
 @beartype.beartype
 class PatchEmbedding(torch.nn.Module):
-    def __init__(self, in_ch: int, output_d: int, patch_size: int):
+    """
+    Module to patchify images and project from pixel space to embedding space.
+    """
+
+    def __init__(self, ch: int, output_d: int, patch_size: int):
+        """
+        Args:
+            ch: Number of channels in input images (almost always 3).
+            output_d: Output dimension.
+            patch_size: Length of one size of a patch.
+        """
         super().__init__()
         self.patch_size = patch_size
-        self.linear = torch.nn.Linear(patch_size * patch_size * in_ch, output_d)
+        self.linear = torch.nn.Linear(patch_size * patch_size * ch, output_d)
 
     @jaxtyped(typechecker=beartype.beartype)
     def forward(
@@ -76,6 +87,10 @@ class PatchEmbedding(torch.nn.Module):
 
 @beartype.beartype
 class AttentionBlock(torch.nn.Module):
+    """
+    A pre-norm transformer layer, combining a self-attention layer without any masking and a single-layer MLP.
+    """
+
     def __init__(self, d: int, d_mlp: int, n_heads: int, p_dropout: float):
         """
         Args:
@@ -176,10 +191,17 @@ class VisionTransformer(torch.nn.Module):
         d_mlp = int(d * 4 / 3)
 
         self.transformer = Transformer(d, d_mlp, n_heads, n_layers, p_dropout)
+        # all_mask is a mask that contains all the patches.
+        width_p, height_p = size_p
+        self.register_buffer("all_mask", torch.arange(width_p * height_p))
 
     def forward(
-        self, x: Float[Tensor, "batch 3 width height"], mask: Int[Tensor, " patches"]
+        self,
+        x: Float[Tensor, "batch 3 width height"],
+        mask: None | Int[Tensor, " patches"] = None,
     ) -> Float[Tensor, "batch patches d"]:
+        if mask is None:
+            mask = self.all_mask
         x = self.patch_embd(x)
         x = x[:, mask, :]
         x = x + self.pos_embd(mask)
@@ -193,7 +215,61 @@ class VisionTransformer(torch.nn.Module):
 class PredictorTransformer(torch.nn.Module):
     """
     Narrow predictor transformer for predicting the target representations from the context representations and the positional embeddings.
+
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        d: int,
+        n_heads: int,
+        n_layers: int,
+        p_dropout: float,
+        d_vit: int,
+        size_p: tuple[int, int],
+    ):
+        """
+        Args:
+            d: Transformer residual dimension.
+            n_heads: Number of transformer attention heads.
+            n_layers: Number of transformer layers.
+            p_dropout: Probability of dropout in transformer layers.
+            d_vit: ViT dimension (input to this model).
+            size_p: Size of inputs in patches.
+        """
         super().__init__()
+
+        self.proj_in = torch.nn.Linear(d_vit, d)
+        self.pos_embd = PositionalEmbedding(d, size_p)
+        # TODO: initialize the mask_token with a truncated normal.
+        self.mask_token = torch.nn.Parameter(torch.zeros(d))
+
+        # Use 4/3x expansion instead of 4x.
+        # TODO: check on this.
+        d_mlp = int(d * 4 / 3)
+
+        self.transformer = Transformer(d, d_mlp, n_heads, n_layers, p_dropout)
+        self.proj_out = torch.nn.Linear(d, d_vit)
+
+    def forward(
+        self,
+        x: Float[Tensor, "batch n_ctx_patches d_vit"],
+        tgt_masks: Int[Tensor, " n_tgt_patches"],
+    ) -> Float[Tensor, "batch n_tgt_patches d_vit"]:
+        """
+        Given `x`, the output of the context encoder, we want to predict the patch-level target block representations. To do that, we combine a learnable mask token with a fixed position embedding for the target patches.
+        """
+        (n_tgt_patches,) = tgt_masks.shape
+        batch_size, _, _ = x.shape
+
+        x = self.proj_in(x)
+
+        masked = self.mask_token[None, :] + self.pos_embd(tgt_masks)
+        masked = masked.expand(batch_size, -1, -1)
+
+        x = torch.cat((masked, x), dim=1)
+        x = self.transformer(x)
+
+        # Ignore representations for x; we only care about the tgt patches.
+        x = x[:, :n_tgt_patches, :]
+        x = self.proj_out(x)
+        return x
