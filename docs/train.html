@@ -73,6 +73,12 @@ hljs.highlightAll();
 <dd>After resizing, how big should the crop be resized to.</dd>
 </dl></div>
 </dd>
+<dt id="train.print_env"><code class="name flex">
+<span>def <span class="ident">print_env</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
 <dt id="train.to_json_value"><code class="name flex">
 <span>def <span class="ident">to_json_value</span></span>(<span>value: object)</span>
 </code></dt>
@@ -93,7 +99,7 @@ hljs.highlightAll();
 <dl>
 <dt id="train.Args"><code class="flex name class">
 <span>class <span class="ident">Args</span></span>
-<span>(</span><span>batch_size: int = 128, n_epochs: int = 40, data_url: str = '/fs/ess/PAS2136/open_clip/data/evobio10m-v3.3/224x224/train/shard-{000000..000159}.tar', n_imgs: int = 9562377, n_workers: int = 4, resize_size: int = 256, crop_size: int = 224, tgt_mask_scale: tuple[float, float] = (0.15, 0.2), tgt_mask_aspect_ratio: tuple[float, float] = (0.75, 1.5), n_tgt_blocks: int = 4, ctx_mask_scale: tuple[float, float] = (0.85, 1.0), ctx_mask_aspect_ratio: tuple[float, float] = (1.0, 1.0), min_ctx_patches: int = 10, d_vit: int = 768, n_vit_heads: int = 12, n_vit_layers: int = 12, p_vit_dropout: float = 0.1, patch_size: int = 16, d_pred: int = 384, n_pred_heads: int = 12, n_pred_layers: int = 6, p_pred_dropout: float = 0.1, lr_init: float = 0.0001, lr_max: float = 0.001, lr_final: float = 1e-06, n_lr_warmup: int = 143435655, newt_args: typing.Annotated[<a title="newt.Args" href="newt.html#newt.Args">Args</a>, _ArgConfiguration(name='<a title="newt" href="newt.html">newt</a>', metavar=None, help=None, help_behavior_hint=None, aliases=None, prefix_name=None, constructor_factory=None)] = &lt;factory&gt;, device: str | torch.device = 'cuda', gpus_per_node: int = 4, cpus_per_task: int = 12, slurm: bool = True, slurm_acct: str = 'PAS2136', wandb_entity: str = 'samuelstevens', wandb_project: str = 'ijepa', track: bool = True, log_every: int = 10, log_to: str = 'logs', is_ddp: bool = False, local_rank: int = 0, global_rank: int = 0, is_master: bool = True)</span>
+<span>(</span><span>batch_size: int = 128, n_epochs: int = 40, data_url: str = '/fs/ess/PAS2136/open_clip/data/evobio10m-v3.3/224x224/train/shard-{000000..000159}.tar', n_imgs: int = 9562377, n_workers: int = 4, resize_size: int = 256, crop_size: int = 224, tgt_mask_scale: tuple[float, float] = (0.15, 0.2), tgt_mask_aspect_ratio: tuple[float, float] = (0.75, 1.5), n_tgt_blocks: int = 4, ctx_mask_scale: tuple[float, float] = (0.85, 1.0), ctx_mask_aspect_ratio: tuple[float, float] = (1.0, 1.0), min_ctx_patches: int = 10, d_vit: int = 768, n_vit_heads: int = 12, n_vit_layers: int = 12, p_vit_dropout: float = 0.1, patch_size: int = 16, d_pred: int = 384, n_pred_heads: int = 12, n_pred_layers: int = 6, p_pred_dropout: float = 0.1, lr_init: float = 0.0001, lr_max: float = 0.001, lr_final: float = 1e-06, n_lr_warmup: int = 143435655, newt_args: typing.Annotated[<a title="newt.Args" href="newt.html#newt.Args">Args</a>, _ArgConfiguration(name='<a title="newt" href="newt.html">newt</a>', metavar=None, help=None, help_behavior_hint=None, aliases=None, prefix_name=None, constructor_factory=None)] = &lt;factory&gt;, eval_every: int = 10000, device: str = 'cuda', gpus_per_node: int = 4, cpus_per_task: int = 12, slurm: bool = True, slurm_acct: str = 'PAS2136', wandb_entity: str = 'samuelstevens', wandb_project: str = 'ijepa', track: bool = True, log_every: int = 10, log_to: str = 'logs', is_ddp: bool = False, local_rank: int = 0, global_rank: int = 0, is_master: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Configuration for a training run.</p></div>
@@ -185,9 +191,10 @@ class Args:
             )
         )
     )
+    eval_every: int = 10_000
 
     # Hardware
-    device: str | torch.device = &#34;cuda&#34;
+    device: str = &#34;cuda&#34;
     &#34;&#34;&#34;Hardware accelerator (if any); either &#39;cpu&#39; or &#39;cuda&#39;. Do not specify specific GPUs; use CUDA_VISIBLE_DEVICES for that.&#34;&#34;&#34;
     gpus_per_node: int = 4
     &#34;&#34;&#34;Number of GPUs per node.&#34;&#34;&#34;
@@ -263,9 +270,13 @@ class Args:
 <dd>
 <div class="desc"><p>Path to webdataset shards.</p></div>
 </dd>
-<dt id="train.Args.device"><code class="name">var <span class="ident">device</span> : str | torch.device</code></dt>
+<dt id="train.Args.device"><code class="name">var <span class="ident">device</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Hardware accelerator (if any); either 'cpu' or 'cuda'. Do not specify specific GPUs; use CUDA_VISIBLE_DEVICES for that.</p></div>
+</dd>
+<dt id="train.Args.eval_every"><code class="name">var <span class="ident">eval_every</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 <dt id="train.Args.global_rank"><code class="name">var <span class="ident">global_rank</span> : int</code></dt>
 <dd>
@@ -626,6 +637,7 @@ class MaskCollator:
 <li><code><a title="train.log_and_continue" href="#train.log_and_continue">log_and_continue</a></code></li>
 <li><code><a title="train.make_dataloader" href="#train.make_dataloader">make_dataloader</a></code></li>
 <li><code><a title="train.make_img_transform" href="#train.make_img_transform">make_img_transform</a></code></li>
+<li><code><a title="train.print_env" href="#train.print_env">print_env</a></code></li>
 <li><code><a title="train.to_json_value" href="#train.to_json_value">to_json_value</a></code></li>
 <li><code><a title="train.train" href="#train.train">train</a></code></li>
 </ul>
@@ -644,6 +656,7 @@ class MaskCollator:
 <li><code><a title="train.Args.d_vit" href="#train.Args.d_vit">d_vit</a></code></li>
 <li><code><a title="train.Args.data_url" href="#train.Args.data_url">data_url</a></code></li>
 <li><code><a title="train.Args.device" href="#train.Args.device">device</a></code></li>
+<li><code><a title="train.Args.eval_every" href="#train.Args.eval_every">eval_every</a></code></li>
 <li><code><a title="train.Args.global_rank" href="#train.Args.global_rank">global_rank</a></code></li>
 <li><code><a title="train.Args.gpus_per_node" href="#train.Args.gpus_per_node">gpus_per_node</a></code></li>
 <li><code><a title="train.Args.is_ddp" href="#train.Args.is_ddp">is_ddp</a></code></li>

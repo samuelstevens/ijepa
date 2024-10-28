@@ -57,7 +57,7 @@ class Args:
     """Number of dataloader worker processes."""
     log_every: int = 10
     """How often (number of batches) to log progress."""
-    device: str | torch.device = "cuda"
+    device: str = "cuda"
     """(computed at runtime) which kind of accelerator to use."""
 
 
@@ -179,16 +179,11 @@ def get_all_task_features(
     total = len(dataloader) if not args.debug else 2
     it = iter(dataloader)
 
-    # Why the HECK doesn't torch.autocast do this for me? Everywhere else in torch, torch.device vs a str doesn't matter, but here it does? Blegh.
-    # Turns out this is expected behavior: https://github.com/pytorch/pytorch/issues/124738. Very silly.
-    device_str = args.device if isinstance(args.device, str) else args.device.type
-    ctx = torch.autocast(device_str)
-
     for b in progress(range(total), every=args.log_every, desc="embed"):
         ids, images = next(it)
         images = images.to(args.device)
 
-        with ctx:
+        with torch.autocast(args.device):
             # Just use the last layer's mean patch vector as features.
             features = model(images).mean(dim=1)
             features = torch.nn.functional.normalize(features, dim=-1)

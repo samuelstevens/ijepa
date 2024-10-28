@@ -11,6 +11,7 @@ import copy
 import dataclasses
 import logging
 import math
+import os
 import time
 import typing
 
@@ -122,9 +123,10 @@ class Args:
             )
         )
     )
+    eval_every: int = 10_000
 
     # Hardware
-    device: str | torch.device = "cuda"
+    device: str = "cuda"
     """Hardware accelerator (if any); either 'cpu' or 'cuda'. Do not specify specific GPUs; use CUDA_VISIBLE_DEVICES for that."""
     gpus_per_node: int = 4
     """Number of GPUs per node."""
@@ -335,6 +337,26 @@ def to_json_value(value: object):
     raise ValueError(f"Could not convert value '{value}' to JSON-compatible value.")
 
 
+def print_env():
+    for key in sorted(os.environ.keys()):
+        if not (
+            key.startswith(("SLURM_", "SUBMITIT_"))
+            or key
+            in (
+                "MASTER_ADDR",
+                "MASTER_PORT",
+                "RANK",
+                "WORLD_SIZE",
+                "LOCAL_RANK",
+                "LOCAL_WORLD_SIZE",
+                "CUDA_VISIBLE_DEVICES",
+            )
+        ):
+            continue
+        value = os.environ.get(key, "MISSING")
+        print(f"{key}={value}")
+
+
 def filter_no_caption_or_no_image(sample):
     has_caption = any("txt" in key for key in sample)
     has_image = (
@@ -411,12 +433,13 @@ def train(args: Args):
     dist_env = submitit.helpers.TorchDistributedEnvironment().export()
 
     if args.device == "cuda":
-        torch.distributed.init_process_group(backend="nccl")
+        torch.distributed.init_process_group(
+            backend="nccl", world_size=dist_env.world_size
+        )
         assert dist_env.rank == torch.distributed.get_rank()
         assert dist_env.world_size == torch.distributed.get_world_size()
         args = dataclasses.replace(
             args,
-            device=torch.device(f"cuda:{dist_env.local_rank}"),
             is_ddp=True,
             global_rank=dist_env.rank,
             local_rank=dist_env.local_rank,
@@ -431,6 +454,7 @@ def train(args: Args):
     # Debugging
     print(args)
     logger.info("%s", repr(args))
+    print_env()
 
     ##########
     # Models #
@@ -463,14 +487,12 @@ def train(args: Args):
     if args.is_ddp:
         ctx_model = torch.nn.parallel.DistributedDataParallel(
             ctx_model,
-            device_ids=[args.local_rank],
             broadcast_buffers=False,
             gradient_as_bucket_view=True,
             static_graph=True,
         )
         pred_model = torch.nn.parallel.DistributedDataParallel(
             pred_model,
-            device_ids=[args.local_rank],
             broadcast_buffers=False,
             gradient_as_bucket_view=True,
             static_graph=True,
@@ -513,15 +535,7 @@ def train(args: Args):
     start_time = time.time()
 
     for epoch in range(args.n_epochs):
-        logger.info("Epoch %d.", epoch + 1)
-
-        ##############
-        # Evaluation #
-        ##############
-        mean_acc = newt.evaluate(args.newt_args, tgt_model, img_transform)
-        metrics = {"epoch": epoch, "eval/newt": mean_acc}
-        run.log(metrics, step=global_step)
-        logger.info("epoch: %d, step: %d, newt acc: %.5f", epoch, global_step, mean_acc)
+        logger.info("Start epoch %d.", epoch)
 
         for b, (imgs, tgt_masks, ctx_mask) in enumerate(dataloader):
             imgs = imgs.to(args.device, non_blocking=True)
@@ -565,10 +579,10 @@ def train(args: Args):
             if global_step % args.log_every == 0:
                 step_per_sec = global_step / (time.time() - start_time)
                 metrics = {
-                    "loss": loss.item(),
-                    "learning_rate": lr,
-                    "momentum": m,
-                    "weight_decay": wd,
+                    "train/loss": loss.item(),
+                    "optim/learning_rate": lr,
+                    "optim/momentum": m,
+                    "optim/weight_decay": wd,
                     "epoch": epoch,
                 }
                 run.log(metrics, step=global_step)
@@ -577,6 +591,17 @@ def train(args: Args):
                     global_step,
                     loss.item(),
                     step_per_sec,
+                )
+
+            if global_step % args.eval_every == 0:
+                ##############
+                # Evaluation #
+                ##############
+                mean_acc = newt.evaluate(args.newt_args, tgt_model, img_transform)
+                metrics = {"epoch": epoch, "eval/newt": mean_acc}
+                run.log(metrics, step=global_step)
+                logger.info(
+                    "epoch: %d, step: %d, newt acc: %.5f", epoch, global_step, mean_acc
                 )
 
             global_step += 1

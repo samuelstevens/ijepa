@@ -72,7 +72,7 @@ We aggregate scores across all 164 tasks.</p>
 <dl>
 <dt id="newt.Args"><code class="flex name class">
 <span>class <span class="ident">Args</span></span>
-<span>(</span><span>seed: int = 42, data: str = '', debug: bool = False, batch_size: int = 256, n_workers: int = 4, log_every: int = 10, device: str | torch.device = 'cuda')</span>
+<span>(</span><span>seed: int = 42, data: str = '', debug: bool = False, batch_size: int = 256, n_workers: int = 4, log_every: int = 10, device: str = 'cuda')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>NeWT configuration.</p></div>
@@ -97,7 +97,7 @@ class Args:
     &#34;&#34;&#34;Number of dataloader worker processes.&#34;&#34;&#34;
     log_every: int = 10
     &#34;&#34;&#34;How often (number of batches) to log progress.&#34;&#34;&#34;
-    device: str | torch.device = &#34;cuda&#34;
+    device: str = &#34;cuda&#34;
     &#34;&#34;&#34;(computed at runtime) which kind of accelerator to use.&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Class variables</h3>
@@ -114,7 +114,7 @@ class Args:
 <dd>
 <div class="desc"><p>Whether to run in debug mode.</p></div>
 </dd>
-<dt id="newt.Args.device"><code class="name">var <span class="ident">device</span> : str | torch.device</code></dt>
+<dt id="newt.Args.device"><code class="name">var <span class="ident">device</span> : str</code></dt>
 <dd>
 <div class="desc"><p>(computed at runtime) which kind of accelerator to use.</p></div>
 </dd>

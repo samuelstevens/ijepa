@@ -15,11 +15,10 @@ def main(args: train.Args):
     if args.slurm:
         executor = submitit.SlurmExecutor(folder=args.log_to)
         executor.update_parameters(
-            time=30,
-            partition="preemptible",
+            time=12 * 60,  # in minutes
+            partition="gpu",
+            # partition="preemptible",
             # partition="debug",
-            # time=30 * 60,  # 30 hours
-            # partition="gpu",
             gpus_per_node=args.gpus_per_node,
             ntasks_per_node=args.gpus_per_node,
             cpus_per_task=args.cpus_per_task,
